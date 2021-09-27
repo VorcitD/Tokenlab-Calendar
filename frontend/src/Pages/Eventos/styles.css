@@ -1,0 +1,76 @@
+.title{
+}
+
+.event-calendar-container{
+    width: 100%;
+    max-width: 1300px;
+    padding: 0 30px;
+    margin: 32px auto;
+}
+
+.calendar-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.event-card{
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 8px;
+    width: 300px;
+    margin: 5px;
+}
+
+.day-card{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+
+    padding: 24px;
+    background: #6d42e4;
+    
+}
+
+.description-card{
+    padding: 24px;
+    background: #ffffff;
+
+}
+.actions-card{
+    display: flex;
+    margin: 10px;
+    justify-content: flex-end;
+}
+.icon{
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+
+.top-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.button-submit-event {
+    width: 200px;
+    height: 60px;
+    background-color:#6d42e4 ;
+    color: #ffffff;
+    margin-bottom: 15px;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+}
+
+.month-calendar{
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.day{
+    color: #ffffff;
+}
