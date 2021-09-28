@@ -29,14 +29,32 @@
 
     padding: 24px;
     background: #6d42e4;
-    
+    font-weight: bold;
+}
+
+.day-card h2{
+    color: #e4e4e4;
+    font-weight: normal;
+    font-size: small;
 }
 
 .description-card{
     padding: 24px;
     background: #ffffff;
-
+    word-wrap: break-word;
+    height: 150px;
+    overflow: auto;
 }
+
+.description-card li{
+    list-style: none;
+    font-weight: bold;
+}
+
+.description-card p{
+    margin-top: 10px;
+}
+
 .actions-card{
     display: flex;
     margin: 10px;

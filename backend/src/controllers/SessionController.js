@@ -19,7 +19,7 @@ module.exports = {
         }
 
         const{id,name} = user;
-        return response.json({
+        return response.status(200).json({
             user:{
                 id,
                 name,

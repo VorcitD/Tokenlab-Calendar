@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import './styles.css';
 import { FiX } from 'react-icons/fi';
 import api from "../../Services/api";
 
 export default function UpdateEventModal({event,id='modal',onClose = ()=>{},children}){
 
-    const [date, setDate] = useState('');
 
     const handleOutsideClick =(e)=>{
         if(e.target.id===id) onClose();
     }
 
-    const [init_date, setInitDate] = useState(new Date());
-    const [end_date, setEndDate] = useState(new Date());
+    const [init_date, setInitDate] = useState('');
+    const [end_date, setEndDate] = useState('');
     const [description, setDescription] = useState('');
+
+    useEffect(()=>{
+        setInitDate(event.init_date);
+        setEndDate(event.end_date);
+        setDescription(event.description);
+    },[event]);
 
     async function handleUpdateEvent(e) {
         e.preventDefault();
 
-        console.log('chamou a função')
 
         const data = {
             init_date,
@@ -26,13 +30,9 @@ export default function UpdateEventModal({event,id='modal',onClose = ()=>{},chil
             description
         }
 
-        console.log({data});
-
-        const token = localStorage.getItem('token')
-        api.defaults.headers.Authorization = `Bearer ${token}`;
-        console.log({event});
+        localStorage.getItem('token')
         try {
-            const response = await api.put(`/events/${event}`, data);
+            await api.put(`/events/${event.id}`, data);
             onClose();
         } catch (error) {
             alert('Erro na atualização de evento');
@@ -51,12 +51,12 @@ export default function UpdateEventModal({event,id='modal',onClose = ()=>{},chil
                 <div className="update-event-form-container">
                     <form onSubmit={handleUpdateEvent} className="update-event-form">
                     <h2>Data e Hora de Inicio</h2>
-                    <input className="update-event-input" type="datetime-local" placeholder="Data e hora de inicio" 
+                    <input className="update-event-input" type="datetime-local"  
                     value={init_date}
                     onChange={e => setInitDate(e.target.value)}
                     />
                     <h2>Data e Hora de Término</h2>
-                    <input className="update-event-input" type="datetime-local" placeholder="Data e hora de término" 
+                    <input className="update-event-input" type="datetime-local"  
                     value={end_date}
                     onChange={e => setEndDate(e.target.value)}
                     />

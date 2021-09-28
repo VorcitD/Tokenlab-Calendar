@@ -14,20 +14,14 @@ export default function NewEventModal({ id = "modal", onClose = () => { }, child
     async function handleCreateEvent(e) {
         e.preventDefault();
 
-        console.log('chamou a função')
-
         const data = {
             init_date,
             end_date,
             description
         }
 
-        console.log({data});
-
-        const token = localStorage.getItem('token')
-        api.defaults.headers.Authorization = `Bearer ${token}`;
         try {
-            const response = await api.post('/events', data);
+            await api.post('/events', data);
             onClose();
         } catch (error) {
             alert('Erro no cadastro de evento');

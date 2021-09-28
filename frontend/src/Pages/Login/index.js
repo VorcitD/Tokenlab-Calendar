@@ -34,7 +34,7 @@ export default function Login() {
                     <section className="form">
                         <h1>Faça seu Login</h1>
                         <form className="login-form" onSubmit={handleLogin}>
-                            <input placeholder="Email" type="text" 
+                            <input placeholder="Email" type="email" 
                             value={email}
                             onChange={(e)=>{setEmail(e.target.value)}}
                             />

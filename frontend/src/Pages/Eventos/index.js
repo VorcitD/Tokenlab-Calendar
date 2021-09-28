@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from "react";
-import { Link } from 'react-router-dom';
 import Header from '../../Components/Header';
 import './styles.css';
 import { FiEdit, FiTrash } from 'react-icons/fi';
@@ -17,9 +16,8 @@ export default function Eventos() {
     const token = localStorage.getItem('token');
 
     useEffect(()=>{
-        api.get('events',{headers:{
-            Authorization:`Bearer ${token}`
-        }}).then(response =>{
+        api.defaults.headers.Authorization = `Bearer ${token}`;
+        api.get('events').then(response =>{
             setEvents(response.data);
         })
     },[token,events]);
@@ -33,9 +31,8 @@ export default function Eventos() {
     }
 
     function handleUpdateEvent(event){
-        console.log(event.id)
-        setSelectedEventId(event.id)
-        console.log(selectedEventId)
+
+        setSelectedEventId(event)
         setIsUpdateEventModalVisible(true)
     }
 
@@ -49,15 +46,13 @@ export default function Eventos() {
                     <h1 className="title">Calendário de Eventos</h1>
                     <button className="button-submit-event" onClick={()=>setIsNewEventModalVisible(true)}>Novo Evento</button>
                 </div>
-                <div className="month-calendar">
-                    <h1>Setembro</h1>
-                </div>
                 <div className="calendar-container">
 
                     {events.map(event=>{
                         const [date,init_time]= event.init_date.split('T');
                         const [end_date,end_time]= event.end_date.split('T');
-                        const [year,month,day]=date.split('-');
+                        const [year,,day]=date.split('-');
+                        const [end_year,end_month,end_day]= end_date.split('-');
                         const [init_time_nozone,] = init_time.split('.');
                         const [end_time_nozone,] = end_time.split('.');
 
@@ -66,7 +61,8 @@ export default function Eventos() {
                         return(
                             <div id={event.id} className="event-card">
                             <div className="day-card">
-                                <h1 className="day">{day}/{monthName[2]}</h1>
+                                <h1 className="day">{day}/{monthName[2]}/{year}</h1>
+                                <h2>Encerra em:{end_day}/{end_month}/{end_year}</h2>
                             </div>
                             <div className="description-card">
                                 <ul>
